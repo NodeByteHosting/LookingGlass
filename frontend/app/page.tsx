@@ -17,33 +17,6 @@ import {
   SearchCheck,
 } from "lucide-react";
 
-const HOW_TO_STEPS = [
-  {
-    icon: MapPin,
-    title: "Choose a node",
-    description:
-      "Select the network node you want to run diagnostics from using the dropdown in the top-right of the form. Nodes are grouped by location.",
-  },
-  {
-    icon: TerminalSquare,
-    title: "Enter a target",
-    description:
-      "Type an IPv4 address, IPv6 address, or a domain name (e.g. 1.1.1.1 or example.com) into the input field.",
-  },
-  {
-    icon: SlidersHorizontal,
-    title: "Pick a tool",
-    description:
-      "Choose the diagnostic tool you want to run — Ping for latency, Traceroute or MTR for path analysis, or BGP for routing lookups.",
-  },
-  {
-    icon: SearchCheck,
-    title: "Run & read results",
-    description:
-      "Hit Run and the output will appear below the form in real time. The elapsed time is shown in the result header.",
-  },
-];
-
 const TOOLS = [
   {
     icon: Activity,
@@ -124,39 +97,6 @@ export default async function LookingGlass() {
 
         {/* Form */}
         <LookingGlassForm config={config} />
-
-        {/* How to use */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2">
-            <MousePointerClick className="h-4 w-4 text-muted-foreground" />
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              How to use
-            </h2>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {HOW_TO_STEPS.map(({ icon: Icon, title, description }, i) => (
-              <div
-                key={title}
-                className="flex gap-3 p-4 rounded-xl border border-border/60 bg-card/50"
-              >
-                <div className="shrink-0 flex flex-col items-center gap-1.5">
-                  <div className="h-7 w-7 rounded-md bg-primary/10 flex items-center justify-center">
-                    <Icon className="h-3.5 w-3.5 text-primary" />
-                  </div>
-                  <span className="text-xs font-bold text-primary/60">
-                    {i + 1}
-                  </span>
-                </div>
-                <div className="space-y-1 min-w-0">
-                  <p className="text-sm font-semibold">{title}</p>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
         {/* Available Nodes */}
         <section className="space-y-4">
@@ -261,10 +201,7 @@ export default async function LookingGlass() {
             </span>
           </div>
           <p className="text-xs text-muted-foreground">
-            Real-time diagnostics from {totalNodes}{" "}
-            {totalNodes === 1 ? "node" : "nodes"} across{" "}
-            {config.locations.length}{" "}
-            {config.locations.length === 1 ? "location" : "locations"}
+            &copy; {new Date().getFullYear()} {config.brand.name}. All rights reserved.
           </p>
         </div>
       </footer>

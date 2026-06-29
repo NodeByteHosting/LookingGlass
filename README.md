@@ -34,7 +34,89 @@ The **frontend** is a single Next.js app configured with the URLs of all your ba
 
 Repeat these steps on **each node** you want to add.
 
-### 1. Copy the backend directory to your node
+### 1. Install system dependencies
+
+Update the package list and install the required network tools:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y iputils-ping traceroute mtr-tiny
+```
+
+If you want BGP lookups via BIRD2:
+
+```bash
+sudo apt install -y bird2
+```
+
+Verify the tools are available:
+
+```bash
+ping -c 1 1.1.1.1
+traceroute -w 1 -q 1 1.1.1.1
+mtr -rwbc 1 1.1.1.1
+birdc show status   # only if bird2 is installed
+```
+
+### 2. Install Bun
+
+```bash
+curl -fsSL https://bun.sh/install | bash
+source ~/.bashrc
+```
+
+Confirm the install and note the path — you'll need it for the systemd unit:
+
+```bash
+which bun
+# e.g. /root/.bun/bin/bun
+```
+
+> If Bun was installed via nvm or another version manager the path may differ (e.g. `/root/.nvm/versions/node/v26.4.0/bin/bun`). Create a stable symlink so the service path never breaks when versions change:
+> ```bash
+> sudo ln -s $(which bun) /usr/local/bin/bun
+> ```
+> Then use `ExecStart=/usr/local/bin/bun run src/index.ts` in the service file.
+
+### 3. Set up UFW
+
+Lock down the node so only SSH and your frontend server can reach the backend port.
+
+```bash
+sudo apt install -y ufw
+
+# Default policies
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+# SSH — keep this open or you will lose access
+sudo ufw allow 22/tcp
+
+# Backend API — allow only your frontend server's IP
+sudo ufw allow from <frontend-server-ip> to any port 8080 proto tcp
+
+# Enable
+sudo ufw enable
+sudo ufw status verbose
+```
+
+Replace `<frontend-server-ip>` with the public IP of the server running your frontend. To add more frontend servers later:
+
+```bash
+sudo ufw allow from <another-ip> to any port 8080 proto tcp
+```
+
+Expected output after `ufw status verbose`:
+
+```
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    Anywhere
+8080/tcp                   ALLOW IN    <frontend-server-ip>
+22/tcp (v6)                ALLOW IN    Anywhere (v6)
+```
+
+### 4. Copy the backend directory to your node
 
 ```bash
 scp -r looking-glass/backend user@your-node:/opt/looking-glass
@@ -42,14 +124,14 @@ scp -r looking-glass/backend user@your-node:/opt/looking-glass
 
 Or clone the repo directly on the node.
 
-### 2. Install dependencies
+### 5. Install Node dependencies
 
 ```bash
 cd /opt/looking-glass
 bun install
 ```
 
-### 3. Configure the backend
+### 6. Configure the backend
 
 Edit `config.json`:
 
@@ -63,7 +145,7 @@ Edit `config.json`:
 |--------|--------------------------------------|
 | `port` | Port the API listens on. Default `8080`. |
 
-### 4. Run the backend
+### 7. Run the backend
 
 **Development (hot reload):**
 ```bash
@@ -75,7 +157,7 @@ bun run dev
 bun run start
 ```
 
-### 5. (Recommended) Run as a systemd service
+### 8. (Recommended) Run as a systemd service
 
 Create `/etc/systemd/system/looking-glass.service`:
 

@@ -46,13 +46,7 @@ export default function LookingGlassForm({ config }: any) {
       const start = new Date().getTime();
 
       const response = await fetch(
-        `${selectedBackend.url}/lg/${type}?ip=${ip}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        `/api/lg/${type}?ip=${encodeURIComponent(ip)}&backend=${encodeURIComponent(selectedBackend.name)}`
       );
 
       const text = await response.text();
