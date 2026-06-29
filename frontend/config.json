@@ -1,0 +1,30 @@
+{
+  "brand": {
+    "name": "NodeByte",
+    "logo": "https://cdn.nodebyte.host/core/logo.svg",
+    "invertLogo": true
+  },
+  "locations": [
+    {
+      "name": "Europe",
+      "backends": [
+        {
+          "name": "Helsinki, Finland",
+          "url": "http://65.21.161.115:8080",
+          "info": {
+            "ipv4": "65.21.161.115",
+            "location": "Europe",
+            "datacenter": "HEL-1"
+          }
+        },
+        {
+          "name": "Newcastle, United Kingdom",
+          "url": "http://localhost:8080",
+          "info": {
+            "ipv4": ""
+          }
+        }
+      ]
+    }
+  ]
+}
