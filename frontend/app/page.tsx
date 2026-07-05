@@ -88,7 +88,8 @@ export default async function LookingGlass() {
           </h1>
           <p className="text-muted-foreground text-sm sm:text-base max-w-2xl">
             Run real-time network diagnostics from {config.locations.length}{" "}
-            {config.locations.length === 1 ? "location" : "locations"}. Use ping,
+            {config.locations.length === 1 ? "location" : "locations"} across{" "}
+            {totalNodes} {totalNodes === 1 ? "node" : "nodes"}. Use ping,
             traceroute, MTR, or BGP lookups to troubleshoot connectivity and
             inspect routing paths.
           </p>
