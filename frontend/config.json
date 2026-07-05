@@ -27,6 +27,20 @@
           }
         }
       ]
+    },
+    {
+      "name": "North America",
+      "backends": [
+        {
+          "name": "Toronto",
+          "url": "http://172.105.4.224:8080",
+          "info": {
+            "ipv4": "172.105.4.224",
+            "location": "Toronto, ON",
+            "datacenter": "TOR-DC1"
+          }
+        }
+      ]
     }
   ]
 }
