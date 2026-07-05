@@ -16,12 +16,7 @@
             "location": "Helsinki, FI",
             "datacenter": "HEL-DC1"
           }
-        }
-      ]
-    },
-    {
-      "name": "Europe",
-      "backends": [
+        },
         {
           "name": "Nuremburg",
           "url": "http://65.21.161.116:8080",
