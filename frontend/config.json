@@ -18,6 +18,20 @@
           }
         }
       ]
+    },
+    {
+      "name": "Europe",
+      "backends": [
+        {
+          "name": "Nuremburg",
+          "url": "http://65.21.161.116:8080",
+          "info": {
+            "ipv4": "128.140.47.239",
+            "location": "Nuremburg, DE",
+            "datacenter": "NUE-DC1"
+          }
+        }
+      ]
     }
   ]
 }
