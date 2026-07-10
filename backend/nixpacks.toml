@@ -1,0 +1,16 @@
+# Explicitly define the providers to prevent Nixpacks from auto-detecting Node 18
+[providers]
+bun = {}
+
+[phases.setup]
+nixPkgs = ["bun", "nodejs_22"]
+aptPkgs = ["iputils-ping", "traceroute", "mtr-tiny", "bird2"]
+
+[phases.install]
+cmds = ["bun install"]
+
+[phases.build]
+cmds = ["bun run build"]
+
+[start]
+cmd = "bun start"
