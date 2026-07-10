@@ -9,15 +9,6 @@
       "name": "Europe",
       "backends": [
         {
-          "name": "Helsinki",
-          "url": "http://65.21.161.116:8080",
-          "info": {
-            "ipv4": "65.21.161.116",
-            "location": "Helsinki, FI",
-            "datacenter": "HEL-DC1"
-          }
-        },
-        {
           "name": "Nuremburg",
           "url": "http://65.21.161.116:8080",
           "info": {
