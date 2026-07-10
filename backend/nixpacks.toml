@@ -1,6 +1,5 @@
-# Explicitly define the providers to prevent Nixpacks from auto-detecting Node 18
-[providers]
-bun = {}
+
+providers = ["bun"]
 
 [phases.setup]
 nixPkgs = ["bun", "nodejs_22"]
