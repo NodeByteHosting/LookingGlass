@@ -1,6 +1,4 @@
 
-providers = ["bun"]
-
 [phases.setup]
 nixPkgs = ["bun", "nodejs_22"]
 aptPkgs = ["iputils-ping", "traceroute", "mtr-tiny", "bird2"]
