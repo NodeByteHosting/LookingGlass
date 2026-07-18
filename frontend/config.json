@@ -9,6 +9,15 @@
       "name": "Europe",
       "backends": [
         {
+          "name": "Falkenstein",
+          "url": "http://144.76.227.87:8080",
+          "info": {
+            "ipv4": "144.76.227.87",
+            "location": "Falkenstein, DE",
+            "datacenter": "FSN-DC1"
+          }
+        },
+        {
           "name": "Nuremburg",
           "url": "http://65.21.161.116:8080",
           "info": {
